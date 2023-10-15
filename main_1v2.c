@@ -73,7 +73,6 @@ struct words* Sort(struct words* word, struct words* head) {
 struct words* SortFromText() {
     char buff[100];
     char* curword;
-    bool wordAded = false;
     int CurrentSymb = 0;
     FILE* f = fopen("file.txt", "r");
     struct words* Header = NULL;
@@ -81,7 +80,6 @@ struct words* SortFromText() {
     while (fgets(buff, 100, f)) {
         CurrentSymb = 0;
         for (int i = 0; i < 100; i++) {
-            wordAded = false;
             curword[i - CurrentSymb] = buff[i];
             if ((buff[i] == ' ' || buff[i] == '\n' || buff[i] == '\0') && ((i - CurrentSymb)>0)) {
                 struct words* Word = AddWord(curword, i - CurrentSymb);
