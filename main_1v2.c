@@ -30,7 +30,7 @@ struct words* Sort(struct words* word, struct words* head) {
         struct words* Current = head;
         struct words* Prev = NULL;
         while (Current) {
-            if (word->len < Current->len) {
+            if ((word->len < Current->len) || ((word->len == Current->len) && strcmp(word->word, Current->word) < 0)) {
                 if (Prev == NULL) {
                     word->next = head;
                     head = word;
@@ -41,19 +41,6 @@ struct words* Sort(struct words* word, struct words* head) {
                     Prev->next = word;
                     return head;
                 }
-            }
-            else if ((word->len == Current->len) && strcmp(word->word, Current->word) < 0) {
-                if (Prev == NULL) {
-                    word->next = head;
-                    head = word;
-                    return head;
-                }
-                else {
-                    word->next = Current;
-                    Prev->next = word;
-                    return head;
-                }
-                break;
             }
             Prev = Current;
             Current = Current->next;
