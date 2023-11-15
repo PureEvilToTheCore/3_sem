@@ -1,15 +1,15 @@
-﻿#include <iostream>
+#include <iostream>
 #define rows 6
 #define cols 6
 using namespace std;
 
 int labirint[rows][cols] = {
-    {0, 0, 1, 0, 0, 0},
-    {0, 1, 1, 0, 1, 0},
-    {0, 1, 0, 0, 1, 0},
-    {0, 1, 1, 1, 1, 0},
-    {0, 0, 0, 0, 1, 0},
-    {0, 0, 1, 0, 0, 0}
+    {1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 0, 1},
+    {1, 0, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 1},
+    {1, 1, 0, 1, 1, 1}
 };
 
 int result[rows][cols];
@@ -58,27 +58,26 @@ bool WayIsSolve(int array[rows][cols]) {
 }
 
 void ShortestWay(int xo, int yo, int array[rows][cols]) {
-    if (xo < 0 || xo >= rows || yo < 0 || yo >= cols || temp[xo][yo] == 2) {
+    if (xo < 0 || xo >= rows || yo < 0 || yo >= cols || temp[xo][yo] == 2 || array[xo][yo] == 1) {
         return;
     }
     temp[xo][yo] = 2;
-    if ((Count(result) == 0 || (Count(result) > Count(temp))) && WayIsSolve(temp)) {
-        if (Count(temp) < ((rows - xo) || (cols - yo))) return;
-        CopyArray(temp, result);
-        ZerosArray(temp);
-        return;
+    if (WayIsSolve(temp)) {
+        if (Count(temp) < Count(result) || Count(result) == 0) {
+            CopyArray(temp, result);
+        }
     }
-    if (yo + 1 < cols && array[xo][yo + 1] == 0) ShortestWay(xo, yo + 1, labirint);
-    if (xo + 1 < rows && array[xo + 1][yo] == 0) ShortestWay(xo + 1, yo, labirint);
-    if (yo - 1 >= 0 && array[xo][yo - 1] == 0) ShortestWay(xo, yo - 1, labirint);
-    if (xo - 1 >= 0 && array[xo - 1][yo] == 0) ShortestWay(xo - 1, yo, labirint);
+    ShortestWay(xo, yo + 1, array);
+    ShortestWay(xo + 1, yo, array);
+    ShortestWay(xo, yo - 1, array);
+    ShortestWay(xo - 1, yo, array);
+    temp[xo][yo] = 0;
 }
-
 
 int main() {
     printArray(labirint);
     cout << "------" << endl;
-    ShortestWay(4, 3, labirint);
+    ShortestWay(1, 1, labirint);
     printArray(result);
     return 0;
 }
