@@ -23,7 +23,6 @@ tree* FindElementByNumber(tree* Base) {
 		return Base;
 	}
 
-	// Проверяем, с какой стороны нужно продолжить поиск
 	if (Base->right != nullptr && DesiredNumber <= Base->right->number) {
 		return FindElementByNumber(Base->right);
 	}
