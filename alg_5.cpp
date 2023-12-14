@@ -31,7 +31,7 @@ tree* FindElementByNumber(tree* Base) {
 		return FindElementByNumber(Base->left);
 	}
 
-	return nullptr; // Возвращаем значение по умолчанию, если узел не найден
+	return nullptr;
 }
 
 tree* FindElementLessNumber(int K) {
@@ -43,7 +43,7 @@ tree* FindElementLessNumber(int K) {
 tree* createNode(int key) {
 	tree* newNode = new tree;
 	newNode->key = key;
-	newNode->number = 1; // Начальное значение для одного узла
+	newNode->number = 1;
 	newNode->left = nullptr;
 	newNode->right = nullptr;
 	return newNode;
@@ -56,11 +56,11 @@ tree* insertNode(tree* root, int key) {
 
 	if (key < root->key) {
 		root->left = insertNode(root->left, key);
-		root->number++; // Увеличиваем количество узлов в левом поддереве
+		root->number++;
 	}
 	else if (key > root->key) {
 		root->right = insertNode(root->right, key);
-		root->number++; // Увеличиваем количество узлов в правом поддереве
+		root->number++;
 	}
 
 	return root;
