@@ -4,7 +4,6 @@ using namespace std;
 
 int DesiredNumber = 0;
 
-
 struct tree {
 	int key;
 	int number; 
