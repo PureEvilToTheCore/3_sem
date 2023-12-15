@@ -19,11 +19,11 @@ tree* FindElementByNumber(tree* Base) {
 		return nullptr;
 	}
 
-	if (Base->number == DesiredNumber) {
+	if (Base->key == DesiredNumber) {
 		return Base;
 	}
 
-	if (Base->right != nullptr && DesiredNumber <= Base->right->number) {
+	if (Base->right != nullptr || Base->key<DesiredNumber) {
 		return FindElementByNumber(Base->right);
 	}
 	else if (Base->left != nullptr) {
@@ -34,7 +34,7 @@ tree* FindElementByNumber(tree* Base) {
 }
 
 tree* FindElementLessNumber(int K) {
-	DesiredNumber = root->number - K;
+	DesiredNumber = root->key - K;
 	tree* root2 = FindElementByNumber(root);
 	return root2;
 }
@@ -75,8 +75,7 @@ int main()
 	insertNode(root, 12);
 	insertNode(root, 18);
 
-	result = FindElementLessNumber(4);
+	result = FindElementLessNumber(12);
 	cout << result->key << endl;
-	cout << result->number;
 	return 0;
 }
