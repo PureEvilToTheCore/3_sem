@@ -1,8 +1,9 @@
-﻿#include <iostream>
+#include <iostream>
 
 using namespace std;
 
 int DesiredNumber = 0;
+
 
 struct tree {
 	int key;
@@ -23,7 +24,7 @@ tree* FindElementByNumber(tree* Base) {
 		return Base;
 	}
 
-	if (Base->right != nullptr || Base->key<DesiredNumber) {
+	if (Base->right != nullptr && DesiredNumber > Base->key) {
 		return FindElementByNumber(Base->right);
 	}
 	else if (Base->left != nullptr) {
@@ -75,7 +76,7 @@ int main()
 	insertNode(root, 12);
 	insertNode(root, 18);
 
-	result = FindElementLessNumber(12);
+	result = FindElementLessNumber(7);
 	cout << result->key << endl;
 	return 0;
 }
